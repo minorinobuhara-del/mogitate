@@ -15,7 +15,7 @@ mogitate
 
 ## 使用技術
 
--PHP8.1.33
+-PHP8.1.34
 -MySQL:8.0.26
 -nginx:1.21.1
 

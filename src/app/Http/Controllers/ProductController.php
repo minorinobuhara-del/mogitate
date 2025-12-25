@@ -11,21 +11,17 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        $products = Product::all();
-        return view('products.index', compact('products'));
-
         // 商品名検索
         if ($request->filled('keyword')) {
             $query->where('name', 'like', '%' . $request->keyword . '%');
         }
 
         // 価格順並び替え
-        if ($request->sort === 'high') {
+        if ($request->sort === 'desc') {
             $query->orderBy('price', 'desc');
-        } elseif ($request->sort === 'low') {
+        } elseif ($request->sort === 'asc') {
             $query->orderBy('price', 'asc');
         }
-
 
         $products = $query->paginate(6);
 

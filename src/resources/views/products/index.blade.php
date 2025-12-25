@@ -35,9 +35,11 @@
         <div class="product-grid">
             @forelse ($products as $product)
                 <div class="product-card">
-                    <img src="{{ asset('storage/' . $product->image) }}">
+                    <img src="{{ asset('images/' . $product->image) }}" alt="商品画像">
                     <div class="product-info">
+                        <!--商品名-->
                         <p class="product-name">{{ $product->name }}</p>
+                        <!--値段-->
                         <p class="product-price">¥{{ number_format($product->price) }}</p>
                     </div>
                 </div>

@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/products.css') }}">
 </head>
 <body>
-    <header>mogitate</header>
-
+    <header class="logo">mogitate</header>
     <main>
         @yield('content')
     </main>
