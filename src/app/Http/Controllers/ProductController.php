@@ -17,14 +17,50 @@ class ProductController extends Controller
         }
 
         // 価格順並び替え
-        if ($request->sort === 'desc') {
+        if ($request->filled('sort')) {
+        if ($request->sort === 'high') {
             $query->orderBy('price', 'desc');
-        } elseif ($request->sort === 'asc') {
+        } elseif ($request->sort === 'low') {
             $query->orderBy('price', 'asc');
         }
+    }
 
         $products = $query->paginate(6);
 
         return view('products.index', compact('products'));
     }
+
+    public function create()
+    {
+        return view('products.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+        'name'  => 'required',
+        'price' => 'required|integer',
+        'image' => 'required|image',
+        'season' => 'required|array',
+        'description' => 'required',
+    ]);
+
+    // 画像を保存
+    if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $validated['image'] = $path;
+        }
+
+    Product::create($validated);
+
+    return redirect('/products/create')->with('success', '商品を登録しました');
+    }
+
+    //商品詳細表示
+    public function show(Product $product)
+{
+    return view('products.show', compact('product'));
+}
+
+
 }

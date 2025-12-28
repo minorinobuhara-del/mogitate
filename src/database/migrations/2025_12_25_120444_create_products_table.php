@@ -11,13 +11,15 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up():void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('price');
-            $table->string('image')->nullable();
+            $table->string('name');//商品名
+            $table->integer('price');//価格
+            $table->string('image_path')->nullable();//画像パス
+            $table->json('season'); // 春・夏・秋・冬（配列）
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -27,7 +29,7 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down():void
     {
         Schema::dropIfExists('products');
     }

@@ -21,10 +21,10 @@
                 <p class="sort-title">価格順で表示</p>
                 <select name="sort" class="sort-select" onchange="this.form.submit()">
                     <option value="">選択してください</option>
-                    <option value="asc" {{ request('sort')=='asc' ? 'selected' : '' }}>
+                    <option value="high" {{ request('sort')=='high' ? 'selected' : '' }}>
                         安い順
                     </option>
-                    <option value="desc" {{ request('sort')=='desc' ? 'selected' : '' }}>
+                    <option value="low" {{ request('sort')=='low' ? 'selected' : '' }}>
                         高い順
                     </option>
                 </select>
@@ -35,7 +35,7 @@
         <div class="product-grid">
             @forelse ($products as $product)
                 <div class="product-card">
-                    <img src="{{ asset('images/' . $product->image) }}" alt="商品画像">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="商品画像">
                     <div class="product-info">
                         <!--商品名-->
                         <p class="product-name">{{ $product->name }}</p>

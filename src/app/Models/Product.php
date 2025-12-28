@@ -13,5 +13,11 @@ class Product extends Model
         'name',
         'price',
         'image',
+        'season',
+        'description',
+    ];
+
+    protected $casts = [
+        'season' => 'array',
     ];
 }
