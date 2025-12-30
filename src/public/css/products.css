@@ -147,3 +147,10 @@ textarea {
     border: none;
     padding: 10px 30px;
 }
+
+/* 商品登録エラー表示 */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}

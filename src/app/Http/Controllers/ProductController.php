@@ -37,13 +37,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-        'name'  => 'required',
-        'price' => 'required|integer',
-        'image' => 'required|image',
-        'season' => 'required|array',
-        'description' => 'required',
-    ]);
+        $validated = $request->validated();
 
     // 画像を保存
     if ($request->hasFile('image')) {
