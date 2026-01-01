@@ -2,5 +2,5 @@
 
 <img src="{{ asset('storage/' . $product->image) }}" alt="商品画像">
 
-<p>￥{{ $product->price }}</p>
-<p>{{ $product->description }}</p>
+<p>価格：¥{{ number_format($product->price) }}</p>
+<a href="{{ route('products.index') }}">一覧に戻る</a>

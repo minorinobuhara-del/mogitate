@@ -3,6 +3,9 @@
 @section('content')
 <div class="container">
     <h2 class="page-title">商品一覧</h2>
+    <a href="{{ route('products.create') }}" class="add-product-btn">
+        + 商品を追加
+    </a>
 
     <div class="product-wrapper">
         <!-- 左サイド -->

@@ -25,26 +25,35 @@ class ProductRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'name' => 'required',
-            'price' => 'required|integer|between:0,10000',
-            'image' => 'required|mimes:png,jpeg',
-            'season' => 'required|array',
-            'description' => 'required|max:120',
+            'name'        => ['required'],
+            'price'       => ['required', 'numeric', 'between:0,10000'],
+            'image'       => ['required', 'mimes:png,jpeg'],
+            'season'      => ['required'],
+            'description' => ['required', 'max:120'],
         ];
     }
     //エラーメッセージ
     public function messages(): array
     {
         return [
+            // 商品名
             'name.required' => '商品名を入力してください',
+
+            // 値段
             'price.required' => '値段を入力してください',
-            'price.integer' => '数値で入力してください',
-            'price.between' => '0〜10000円以内で入力してください',
-            'image.required' => '商品画像を登録してください',
-            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
+            'price.numeric'  => '数値で入力してください',
+            'price.between'  => '0〜10000円以内で入力してください',
+
+            // 画像
+            'image.required' => '画像を登録してください',
+            'image.mimes'    => '「.png」または「.jpeg」形式でアップロードしてください',
+
+            // 季節
             'season.required' => '季節を選択してください',
+
+            // 商品説明
             'description.required' => '商品説明を入力してください',
-            'description.max' => '120文字以内で入力してください',
+            'description.max'      => '120文字以内で入力してください',
         ];
     }
 }

@@ -89,6 +89,14 @@ body {
     color: #333;
 }
 
+.add-product-btn {
+    background: #f5c542;
+    padding: 10px 16px;
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+}
+
 /* 商品登録画面 */
 .product-container {
     width: 600px;

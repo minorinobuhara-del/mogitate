@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -35,7 +36,7 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $validated = $request->validated();
 
@@ -47,7 +48,8 @@ class ProductController extends Controller
 
     Product::create($validated);
 
-    return redirect('/products/create')->with('success', '商品を登録しました');
+    //return redirect('/products/create')->with('success', '商品を登録しました');
+    return redirect()->route('products.index')->with('success', '商品を登録しました');
     }
 
     //商品詳細表示
