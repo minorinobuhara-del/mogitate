@@ -18,6 +18,12 @@ use App\Http\Controllers\ProductController;
     //return view('welcome');
 //});
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+// 詳細（編集）画面
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])
+    ->name('products.edit');
+// 更新処理
+Route::put('/products/{product}', [ProductController::class, 'update'])
+    ->name('products.update');
 Route::get('/products/create', [ProductController::class, 'create']);
 Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products/{product}', [ProductController::class, 'show']);

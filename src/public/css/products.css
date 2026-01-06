@@ -136,6 +136,11 @@ textarea {
     margin-right: 15px;
 }
 
+.preview {
+    margin-top: 10px;
+    max-width: 300px;
+}
+
 .buttons {
     display: flex;
     justify-content: center;
@@ -161,4 +166,39 @@ textarea {
     color: red;
     font-size: 14px;
     margin-top: 5px;
+}
+
+/* 商品詳細画面 */
+.product-image {
+    width: 250px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.product-image:hover {
+    opacity: 0.8;
+}
+
+.detail-image {
+    width: 350px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn-save {
+    background: #f5c842;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
 }

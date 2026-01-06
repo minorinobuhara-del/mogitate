@@ -54,9 +54,32 @@ class ProductController extends Controller
 
     //商品詳細表示
     public function show(Product $product)
-{
+    {
     return view('products.show', compact('product'));
-}
+    }
 
+    public function edit(Product $product)
+    {
+    return view('products.edit', compact('product'));
+    }
 
+    //更新処理
+    public function update(ProductRequest $request, Product $product)
+    {
+        $data = $request->validate([
+        'name' => 'required|string',
+        'price' => 'required|integer',
+        'description' => 'nullable|string',
+        'image' => 'nullable|image',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('products', 'public');
+    }
+
+    $product->update($data);
+
+    return redirect()->route('products.index');
+
+    }
 }

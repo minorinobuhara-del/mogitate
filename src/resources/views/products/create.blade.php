@@ -24,10 +24,12 @@
         @enderror
 
         <label>商品画像 <span class="required">必須</span></label>
-        <input type="file" name="image">
+        <input type="file" name="image" id="imageInput">
+        <img id="imagePreview" class="preview" style="display:300px;">
+        <!--<input type="file" name="image">
         @if (!empty($product->image))
         <img src="{{ asset('storage/' . $product->image) }}" class="preview">
-        @endif
+        @endif-->
 
         @error('image')
         <p class="error">{{ $message }}</p>
@@ -59,4 +61,20 @@
         </div>
     </form>
 </div>
+
+<script>
+document.getElementById('imageInput').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const preview = document.getElementById('imagePreview');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+});
+</script>
 @endsection
+

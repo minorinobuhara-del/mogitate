@@ -38,7 +38,8 @@
         <div class="product-grid">
             @forelse ($products as $product)
                 <div class="product-card">
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="商品画像">
+                    <a href="{{ route('products.edit', $product->id) }}">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="商品画像"></a>
                     <div class="product-info">
                         <!--商品名-->
                         <p class="product-name">{{ $product->name }}</p>
