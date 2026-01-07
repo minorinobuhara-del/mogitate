@@ -25,7 +25,7 @@
 
         <label>商品画像 <span class="required">必須</span></label>
         <input type="file" name="image" id="imageInput">
-        <img id="imagePreview" class="preview" style="display:300px;">
+        <img id="imagePreview" class="preview" style="display:none;">
         <!--<input type="file" name="image">
         @if (!empty($product->image))
         <img src="{{ asset('storage/' . $product->image) }}" class="preview">

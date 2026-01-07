@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -18,15 +19,14 @@ class ProductController extends Controller
         }
 
         // 価格順並び替え
-        if ($request->filled('sort')) {
         if ($request->sort === 'high') {
             $query->orderBy('price', 'desc');
         } elseif ($request->sort === 'low') {
             $query->orderBy('price', 'asc');
+        } else {
+            $query->orderBy('id', 'desc'); // デフォルト
         }
-    }
-
-        $products = $query->paginate(6);
+        $products = $query->paginate(6)->appends($request->query());
 
         return view('products.index', compact('products'));
     }
@@ -48,7 +48,6 @@ class ProductController extends Controller
 
     Product::create($validated);
 
-    //return redirect('/products/create')->with('success', '商品を登録しました');
     return redirect()->route('products.index')->with('success', '商品を登録しました');
     }
 
@@ -64,22 +63,26 @@ class ProductController extends Controller
     }
 
     //更新処理
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        $data = $request->validate([
-        'name' => 'required|string',
-        'price' => 'required|integer',
-        'description' => 'nullable|string',
-        'image' => 'nullable|image',
-    ]);
+    // バリデーション後のデータ取得
+    $data = $request->validated();
 
+    // 画像がアップロードされた場合のみ更新
     if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('products', 'public');
+        $path = $request->file('image')->store('products', 'public');
+        $data['image'] = $path;
     }
 
+    // 季節（配列 → JSON or 配列保存）
+    $data['season'] = $request->season;
+
+    // 商品情報を更新
     $product->update($data);
 
-    return redirect()->route('products.index');
-
+    // 商品一覧ページへリダイレクト
+    return redirect()
+            ->route('products.index')
+            ->with('success', '商品情報を更新しました');
     }
 }

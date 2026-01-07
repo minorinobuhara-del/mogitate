@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if (session('success'))
+        <p class="success-message">
+            {{ session('success') }}
+        </p>
+    @endif
     <h2 class="page-title">商品一覧</h2>
     <a href="{{ route('products.create') }}" class="add-product-btn">
         + 商品を追加

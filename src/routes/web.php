@@ -22,7 +22,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/products/{product}/edit', [ProductController::class, 'edit'])
     ->name('products.edit');
 // 更新処理
-Route::put('/products/{product}', [ProductController::class, 'update'])
+Route::put('/products/{id}', [ProductController::class, 'update'])
     ->name('products.update');
 Route::get('/products/create', [ProductController::class, 'create']);
 Route::post('/products', [ProductController::class, 'store']);

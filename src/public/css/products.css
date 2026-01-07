@@ -56,6 +56,15 @@ body {
 }
 
 /* 商品一覧 */
+
+.success-message {
+    background-color: #e6f4ea;
+    color: #2e7d32;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -132,8 +141,15 @@ textarea {
     height: 120px;
 }
 
+.season {
+    display: flex;
+    gap: 20px;
+}
+
 .season label {
-    margin-right: 15px;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0;
 }
 
 .preview {
