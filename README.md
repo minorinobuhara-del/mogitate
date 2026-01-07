@@ -3,7 +3,7 @@
 mogitate
 
 ##　環境構築
--git clone git@github.com:Estra-Coachtech/laravel-docker-template.git
+-git clone git@github.com:Estra-Coachtech/larvae-docker-template.git
 -docker-compose up -d --build
 
 ## Laravel 環境構築
@@ -13,6 +13,7 @@ mogitate
 -cp .env.example .env
 -php artisan key:generate
 -php artisan migrate
+-php artisan storage:link
 
 ## 使用技術
 
