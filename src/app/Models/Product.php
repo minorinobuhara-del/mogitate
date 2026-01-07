@@ -13,11 +13,12 @@ class Product extends Model
         'name',
         'price',
         'image',
-        'season',
         'description',
     ];
 
-    protected $casts = [
-        'season' => 'array',
-    ];
+    // seasons との多対多リレーション
+    public function seasons()
+    {
+        return $this->belongsToMany(Season::class);
+    }
 }

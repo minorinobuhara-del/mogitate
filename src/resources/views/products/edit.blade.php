@@ -18,25 +18,24 @@
     <input type="number" name="price" value="{{ old('price', $product->price) }}">
 
     <label>季節</label>
-    @php
-    $selectedSeasons = old(
-        'season',
-        is_array($product->season)
-            ? $product->season
-            : explode(',', $product->season ?? '')
-    );
-    @endphp
 
-    @foreach (['春','夏','秋','冬'] as $season)
     <div class="season">
+    @foreach ($seasons ?? '' as $season)
         <label>
-            <input type="checkbox" name="season[]"
-                value="{{ $season }}"
-                {{ in_array($season, $selectedSeasons ?? '') ? 'checked' : '' }}>
-            {{ $season }}
+            <input
+                type="checkbox"
+                name="season[]"
+                value="{{ $season->id }}"
+                {{ $product->seasons->contains($season->id) ? 'checked' : '' }}
+            >
+            {{ $season->name }}
         </label>
-    </div>
     @endforeach
+    </div>
+
+@error('season')
+    <p class="error">{{ $message }}</p>
+@enderror
 
     <label>商品説明</label>
     <textarea name="description">{{ old('description', $product->description) }}</textarea>

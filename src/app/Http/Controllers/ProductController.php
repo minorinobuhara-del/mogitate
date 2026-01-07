@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Season;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
@@ -33,12 +35,17 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $seasons = Season::all();
+        return view('products.create', compact('seasons'));
     }
 
     public function store(ProductRequest $request)
     {
         $validated = $request->validated();
+
+        // season を分離
+        $seasonIds = $validated['season'];
+        unset($validated['season']);
 
     // 画像を保存
     if ($request->hasFile('image')) {
@@ -46,9 +53,29 @@ class ProductController extends Controller
             $validated['image'] = $path;
         }
 
-    Product::create($validated);
+    // products テーブルに保存
+        $product = Product::create($validated);
+
+        //中間テーブル保存
+        $product->seasons()->attach($seasonIds);
 
     return redirect()->route('products.index')->with('success', '商品を登録しました');
+    }
+
+    //商品削除
+    public function destroy(Product $product)
+    {
+        // 画像ファイルを削除
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        // 中間テーブルは cascadeOnDelete で自動削除される
+        $product->delete();
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', '商品を削除しました');
     }
 
     //商品詳細表示
@@ -59,7 +86,8 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-    return view('products.edit', compact('product'));
+        $seasons = Season::all();
+        return view('products.edit', compact('product', 'seasons'));
     }
 
     //更新処理
@@ -68,17 +96,26 @@ class ProductController extends Controller
     // バリデーション後のデータ取得
     $data = $request->validated();
 
+    // season を分離
+    $seasonIds = $data['season'];
+    unset($data['season']);
+
     // 画像がアップロードされた場合のみ更新
     if ($request->hasFile('image')) {
+        // 古い画像を削除
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
         $path = $request->file('image')->store('products', 'public');
         $data['image'] = $path;
     }
 
-    // 季節（配列 → JSON or 配列保存）
-    $data['season'] = $request->season;
-
     // 商品情報を更新
     $product->update($data);
+
+    // 中間テーブル更新
+    $product->seasons()->sync($seasonIds);
 
     // 商品一覧ページへリダイレクト
     return redirect()

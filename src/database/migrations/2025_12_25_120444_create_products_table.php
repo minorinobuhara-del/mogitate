@@ -17,8 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');//商品名
             $table->integer('price');//価格
-            $table->string('image_path')->nullable();//画像パス
-            $table->json('season'); // 春・夏・秋・冬（配列）
+            $table->string('image')->nullable();//画像パス
             $table->text('description');
             $table->timestamps();
         });

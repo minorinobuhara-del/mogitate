@@ -43,6 +43,15 @@
         <div class="product-grid">
             @forelse ($products as $product)
                 <div class="product-card">
+            <form
+            action="{{ route('products.destroy', $product->id) }}"
+            method="POST"
+            class="delete-form"
+            onsubmit="return confirm('本当に削除しますか？');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="delete-btn">🗑</button>
+            </form>
                     <a href="{{ route('products.edit', $product->id) }}">
                     <img src="{{ asset('storage/' . $product->image) }}" alt="商品画像"></a>
                     <div class="product-info">
