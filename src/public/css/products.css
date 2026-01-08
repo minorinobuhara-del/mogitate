@@ -106,6 +106,60 @@ body {
     text-decoration: none;
 }
 
+/* ページネーション全体を中央寄せ */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* ul */
+.pagination {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+/* li */
+.pagination li {
+    width: 36px;
+    height: 36px;
+}
+
+/* 通常ページ */
+.pagination li a,
+.pagination li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+/* 現在のページ */
+.pagination li.active span {
+    background-color: #f5c518;
+    color: #fff;
+    border-color: #f5c518;
+}
+
+/* 無効（Previous / Next の端） */
+.pagination li.disabled span {
+    color: #ccc;
+    border-color: #eee;
+}
+
+.pagination li a:hover {
+    background-color: #f5c518;
+    color: #fff;
+}
+
 /*削除ボタン*/
 .delete-btn {
     background: none;
