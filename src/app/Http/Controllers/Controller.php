@@ -9,5 +9,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    //public function index()
+    //{
+    //$products = Product::with('seasons')->paginate(9);
+    //return view('products.index', compact('products'));
+    //}
 }

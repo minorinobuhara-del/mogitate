@@ -112,7 +112,12 @@ class ProductController extends Controller
     }
 
     // 商品情報を更新
-    $product->update($data);
+    $product->update([
+        'name' => $validated['name'],
+        'price' => $validated['price'],
+        'description' => $validated['description'],
+        'image' => $validated['image'] ?? $product->image,
+    ]);
 
     // 中間テーブル更新
     $product->seasons()->sync($seasonIds);

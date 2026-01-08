@@ -28,3 +28,6 @@ Route::get('/products/create', [ProductController::class, 'create']);
 Route::post('/products', [ProductController::class, 'store']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
 Route::resource('products', ProductController::class);
+//削除処理
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])
+    ->name('products.destroy');
