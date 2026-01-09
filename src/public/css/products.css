@@ -98,12 +98,25 @@ body {
     color: #333;
 }
 
+/* 商品追加ボタン */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .add-product-btn {
     background: #f5c542;
     padding: 10px 16px;
     border-radius: 6px;
-    color: #fff;
+    color: #000;
     text-decoration: none;
+    font-weight: bold;
+}
+
+.add-product-btn:hover {
+    opacity: 0.85;
 }
 
 /* ページネーション全体を中央寄せ */

@@ -53,8 +53,8 @@
     enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <button type="submit" class="btn-save">変更を保存</button>
-    </form>
+    <button type="submit" class="btn-save">変更を保存</button></form>
+    </div>
     <form action="{{ route('products.destroy', $product->id) }}"
         method="POST"
         onsubmit="return confirm('この商品を削除しますか？');"
@@ -63,7 +63,6 @@
         @method('DELETE')
         <button type="submit" class="product-delete-btn">🗑</button>
     </form>
-    </div>
 
 </form>
 </div>
