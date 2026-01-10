@@ -81,6 +81,7 @@ class ProductController extends Controller
     //商品詳細表示
     public function show(Product $product)
     {
+    $product->load('seasons');
     return view('products.show', compact('product'));
     }
 
@@ -119,7 +120,7 @@ class ProductController extends Controller
 
     // 商品一覧ページへリダイレクト
     return redirect()
-            ->route('products.index')
+            ->route('products.show', $product->id)
             ->with('success', '商品情報を更新しました');
     }
 }

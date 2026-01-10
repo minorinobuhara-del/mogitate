@@ -48,23 +48,27 @@
 
     <div class="buttons">
     <a href="{{ route('products.index') }}" class="back">戻る</a>
+
     <form action="{{ route('products.update', $product->id) }}"
-    method="POST"
-    enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
-    <button type="submit" class="btn-save">変更を保存</button></form>
-    </div>
+          method="POST"
+          enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <button type="submit" class="btn-save">変更を保存</button>
+    </form>
+
     <form action="{{ route('products.destroy', $product->id) }}"
-        method="POST"
-        onsubmit="return confirm('この商品を削除しますか？');"
-        style="display:inline;">
+          method="POST"
+          onsubmit="return confirm('この商品を削除しますか？');">
         @csrf
         @method('DELETE')
         <button type="submit" class="product-delete-btn">🗑</button>
     </form>
+    </div>
+
 
 </form>
 </div>
 
 @endsection
+
