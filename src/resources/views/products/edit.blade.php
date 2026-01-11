@@ -22,9 +22,15 @@
     <div class="form-area">
         <label>商品名</label>
         <input type="text" name="name" value="{{ old('name', $product->name) }}">
+        @error('name')
+        <p class="error">{{ $message }}</p>
+        @enderror
 
         <label>値段</label>
         <input type="number" name="price" value="{{ old('price', $product->price) }}">
+        @error('price')
+        <p class="error">{{ $message }}</p>
+        @enderror
 
         <label>季節</label>
         <div class="season">
@@ -45,6 +51,9 @@
 
     <label>商品説明</label>
     <textarea name="description">{{ old('description', $product->description) }}</textarea>
+    @error('description')
+    <p class="error">{{ $message }}</p>
+    @enderror
 
     <div class="buttons">
     <a href="{{ route('products.index') }}" class="back">戻る</a>

@@ -28,7 +28,7 @@ class ProductUpdateRequest extends FormRequest
             'price' => 'required|integer|min:0|max:10000',
             'image' => 'nullable|image|mimes:png,jpeg',
             'season' => 'required|array',
-            'season.*' => 'in:春,夏,秋,冬',
+            'season.*' => 'integer|exists:seasons,id',
             'description' => 'required|string|max:120',
         ];
     }
