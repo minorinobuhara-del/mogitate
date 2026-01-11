@@ -348,15 +348,3 @@ textarea {
     font-weight: bold;
     cursor: pointer;
 }
-
-/* 商品詳細エラーメッセージ*/
-.error-box{
-    margin-bottom: 20px;
-}
-.error-box ul{
-    list-style: none;
-    padding-left: 0;
-}
-.error {
-    color: red;
-}
